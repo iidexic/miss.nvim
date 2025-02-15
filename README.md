@@ -28,13 +28,7 @@ Plug 'Enigama/miss.nvim'
 
 ## Usage
 
-To list unsaved files, run:
-
-```vim
-:lua require('miss').list_unsaved_buffers()
-```
-
-Or use the default keybinding:
+Use the default keybinding:
 
 ```vim
 <leader>a
@@ -56,16 +50,6 @@ Miss works out of the box but can be initialized manually:
 ```lua
 require('miss').setup()
 ```
-
-## API
-
-### `require('miss').setup()`
-
-Initializes the plugin and binds `<leader>a` to open the popup.
-
-### `require('miss').list_unsaved_buffers()`
-
-Displays a floating popup window with unsaved files.
 
 ## License
 
