@@ -1,0 +1,94 @@
+*miss.txt*  Neovim Plugin Documentation
+
+===============================================================================
+Miss - Unsaved Files Manager                         
+===============================================================================
+
+Author: Enigama [enigama3@gmail.com](mailto\:enigama3@gmail.com)
+Version: 1.0
+License: MIT
+
+# Table of Contents \~
+
+1. Introduction           |miss-intro|
+
+2. Installation           |miss-install|
+
+3. Usage                 |miss-usage|
+
+4. Commands              |miss-commands|
+
+5. Configuration         |miss-config|
+
+6. Keybindings           |miss-keybindings|
+
+7. API                   |miss-api|
+
+8. Introduction \~ *miss-intro*
+   \==============================================================================
+   This plugin provides an interface for managing unsaved buffers in Neovim.
+   It lists all modified buffers in a popup window, allowing the user to quickly
+   save or open them in a new tab.
+
+9. Installation \~ *miss-install*
+   \==============================================================================
+   Using `packer.nvim`:
+
+```lua
+use 'Enigama/miss.nvim'
+```
+
+Using `vim-plug`:
+
+```vim
+Plug 'Enigama/miss.nvim'
+```
+
+3. Usage \~ *miss-usage*
+   \==============================================================================
+   Run the following command to open the popup listing unsaved files:
+
+```vim
+:lua require('miss').parse_files()
+```
+
+4. Commands \~ *miss-commands*
+   \==============================================================================
+   Currently, the plugin does not define any commands, but users can call
+   `require('miss').parse_files()` to activate the popup.
+
+5. Configuration \~ *miss-config*
+   \==============================================================================
+   The plugin does not require any configuration but can be initialized as follows:
+
+```lua
+require('miss').setup()
+```
+
+6. Keybindings \~ *miss-keybindings*
+   \==============================================================================
+
+- `<leader>a` - Opens the popup listing unsaved files.
+- `s` - Saves the selected file and reopens the popup if needed.
+- `<CR>` (Enter) - Opens the selected file in a new tab.
+- `q` - Closes the popup window.
+
+7. API \~ *miss-api*
+   \==============================================================================
+
+### `require('miss').setup()`
+
+Initializes the plugin and binds `<leader>a` to open the popup.
+
+### `require('miss').parse_files()`
+
+Lists all unsaved files in a floating popup window.
+
+---
+
+### Internal Functions (for reference):
+
+- `save_selected_file()` - Saves the currently selected file.
+- `open_selected_file()` - Opens the selected file in a new tab.
+- `close_popup()` - Closes the popup window.
+- `show_file_popup(files)` - Displays a floating window with the unsaved files.
