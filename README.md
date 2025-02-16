@@ -49,3 +49,5 @@ Miss works out of the box but can be initialized manually:
 ```lua
 require('miss').setup()
 ```
+## 🤝 Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
