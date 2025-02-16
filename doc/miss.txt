@@ -6,7 +6,6 @@ Miss - Unsaved Files Manager
 
 Author: Enigama [enigama3@gmail.com](mailto\:enigama3@gmail.com)
 Version: 1.0
-License: MIT
 
 # Table of Contents \~
 
