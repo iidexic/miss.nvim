@@ -1,8 +1,8 @@
-# Miss - Unsaved Files Manager for Neovim
+# Miss - Unsaved Files Manager
 
 ![Neovim](https://img.shields.io/badge/Neovim-%3E=0.5-blue.svg)
 
-Miss is a Neovim plugin that helps manage unsaved files. It provides a popup window listing all modified buffers, allowing you to quickly save or open them in new tabs.
+Miss helps manage unsaved files. It provides a popup window listing all modified buffers, allowing you to quickly save or open them in new tabs.
 
 ## Features
 
