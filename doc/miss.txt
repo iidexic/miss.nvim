@@ -70,6 +70,7 @@ require('miss').setup()
 - `<leader>a` - Opens the popup listing unsaved files.
 - `s` - Saves the selected file and reopens the popup if needed.
 - `<CR>` (Enter) - Opens the selected file in a new tab.
+- `x`- Reset changes of selected file and refresh list.
 - `q` - Closes the popup window.
 
 7. API \~ *miss-api*
@@ -89,5 +90,6 @@ Lists all unsaved files in a floating popup window.
 
 - `save_selected_file()` - Saves the currently selected file.
 - `open_selected_file()` - Opens the selected file in a new tab.
+- `reset_changes() - Reset unsaved changes of currently selected file.`
 - `close_popup()` - Closes the popup window.
 - `show_file_popup(files)` - Displays a floating window with the unsaved files.

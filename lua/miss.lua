@@ -79,13 +79,41 @@ local function open_selected_file()
 	end
 end
 
-local function save_reopen()
-	save_selected_file()
+local function reset_changes()
+	local file_path = get_file_path()
+	local buf_id = check_buf(file_path)
+
+	if buf_id == -1 then
+		return
+	end
+
+	if vim.api.nvim_buf_get_option(buf_id, "modified") then
+		vim.api.nvim_buf_call(buf_id, function()
+			vim.cmd("e!")
+		end)
+		state.count = math.max(state.count - 1, 0)
+		vim.notify("Reset: " .. file_path, vim.log.levels.INFO)
+	else
+		vim.notify("File is not modified: " .. file_path, vim.log.levels.INFO)
+	end
+end
+
+local function restar()
 	if state.count > 0 then
 		vim.schedule(parse_files) -- Ensure async execution
 	else
 		close_popup()
 	end
+end
+
+local function save_restart()
+	save_selected_file()
+	restar()
+end
+
+local function reset_restart()
+	reset_changes()
+	restar()
 end
 
 local function show_file_popup(files)
@@ -109,8 +137,8 @@ local function show_file_popup(files)
 	state.floating = win
 
 	vim.api.nvim_buf_set_keymap(buf, "n", "q", "<Cmd>bd!<CR>", { noremap = true, silent = true })
-
-	vim.keymap.set("n", "s", save_reopen, { buffer = buf, noremap = true, silent = true })
+	vim.keymap.set("n", "s", save_restart, { buffer = buf, noremap = true, silent = true })
+	vim.keymap.set("n", "x", reset_restart, { buffer = buf, noremap = true, silent = true })
 	vim.keymap.set("n", "<CR>", open_selected_file, { buffer = buf, noremap = true, silent = true })
 
 	vim.api.nvim_create_autocmd("WinLeave", {

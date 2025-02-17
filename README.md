@@ -8,6 +8,7 @@ Miss helps manage unsaved files. It provides a popup window listing all modified
 
 - Lists all unsaved files in a floating popup window.
 - Save selected files directly from the popup.
+- Reset all changes from selected file from the popup.
 - Open selected files in a new tab.
 - Easy-to-use keybindings.
 
@@ -35,12 +36,13 @@ Use the default keybinding:
 
 ## Keybindings
 
-| Key            | Action                              |
-| -------------- | ----------------------------------- |
-| `<leader>a`    | Show popup with unsaved files       |
-| `s`            | Save selected file and refresh list |
-| `<CR>` (Enter) | Open selected file in a new tab     |
-| `q`            | Close the popup                     |
+| Key            | Action                                          |
+| -------------- | ----------------------------------------------- |
+| `<leader>a`    | Show popup with unsaved files                   |
+| `s`            | Save selected file and refresh list             |
+| `<CR>` (Enter) | Open selected file in a new tab                 |
+| `x`            | Reset changes of selected file and refresh list |
+| `q`            | Close the popup                                 |
 
 ## Configuration
 
