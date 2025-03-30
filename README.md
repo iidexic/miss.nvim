@@ -10,6 +10,7 @@ Miss helps manage unsaved files. It provides a popup window listing all modified
 - Save selected files directly from the popup.
 - Reset all changes from selected file from the popup.
 - Open selected files in a new tab.
+- Safety run user commands as a callback if there are unsaved files.
 - Easy-to-use keybindings.
 
 ## Installation
@@ -34,6 +35,16 @@ Use the default keybinding:
 <leader>a
 ```
 
+Could be used for git status safety:
+
+```
+keymap("n", "<leader>gs", function()
+    require("miss").has_missed_files(function()
+        vim.cmd(":G")
+    end)
+end, opts)
+```
+
 ## Keybindings
 
 | Key            | Action                                          |
@@ -51,5 +62,7 @@ Miss works out of the box but can be initialized manually:
 ```lua
 require('miss').setup()
 ```
+
 ## 🤝 Contributing
+
 Contributions are welcome! Please feel free to submit a Pull Request.

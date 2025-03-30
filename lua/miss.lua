@@ -171,6 +171,31 @@ function parse_files()
 	end
 end
 
+function M.has_missed_files(cb)
+	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+		if vim.api.nvim_buf_get_option(buf, "modified") then
+			vim.ui.select({ "Yes", "No" }, {
+				prompt = "You have unsaved changes. Do you want to proceed?",
+			}, function(choice)
+				if choice == nil then
+					choice = "No"
+				end
+
+				if choice == "Yes" and cb then
+					cb()
+				else
+					print("Cancelled.")
+				end
+			end)
+			return
+		end
+	end
+
+	if cb then
+		cb()
+	end
+end
+
 M.setup = function()
 	vim.keymap.set("n", "<leader>a", parse_files)
 end

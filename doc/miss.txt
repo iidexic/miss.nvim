@@ -53,8 +53,15 @@ Plug 'Enigama/miss.nvim'
 
 4. Commands \~ *miss-commands*
    \==============================================================================
-   Currently, the plugin does not define any commands, but users can call
-   `require('miss').parse_files()` to activate the popup.
+   The plugin has built-in function `has_missed_files` to wrap user commands.
+
+```
+keymap("n", "<leader>gs", function()
+    require("miss").has_missed_files(function()
+        vim.cmd(":G")
+    end)
+end, opts)
+```
 
 5. Configuration \~ *miss-config*
    \==============================================================================
