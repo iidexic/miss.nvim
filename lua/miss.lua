@@ -52,7 +52,7 @@ local function save_selected_file()
 		return
 	end
 
-	if vim.api.nvim_buf_get_option(buf_id, "modified") then
+	if vim.api.nvim_get_option_value("modified", { buf = buf_id }) then
 		vim.api.nvim_buf_call(buf_id, function()
 			vim.cmd("write")
 		end)
@@ -71,7 +71,7 @@ local function open_selected_file()
 		return
 	end
 
-	if vim.api.nvim_buf_get_option(buf_id, "modified") then
+	if vim.api.nvim_get_option_value("modified", { buf = buf_id }) then
 		vim.api.nvim_command("tabnew") -- Open a new tab
 		vim.api.nvim_set_current_buf(buf_id)
 	else
@@ -87,7 +87,7 @@ local function reset_changes()
 		return
 	end
 
-	if vim.api.nvim_buf_get_option(buf_id, "modified") then
+	if vim.api.nvim_get_option_value("modified", { buf = buf_id }) then
 		vim.api.nvim_buf_call(buf_id, function()
 			vim.cmd("e!")
 		end)
@@ -149,12 +149,12 @@ end
 
 ---@diagnostic disable-next-line: lowercase-global
 function parse_files()
-	local root_path = vim.loop.cwd() or ""
+	local root_path = vim.uv.cwd() or ""
 	local escaped_root = escape_pattern(root_path)
 	local changed_files = {}
 
 	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-		if vim.api.nvim_buf_get_option(buf, "modified") then
+		if vim.api.nvim_get_option_value("modified", { buf = buf }) then
 			local file = vim.api.nvim_buf_get_name(buf)
 			if file ~= "" then
 				local relativeFilePath = file:gsub("^" .. escaped_root .. "/", "", 1)
@@ -173,7 +173,7 @@ end
 
 function M.has_missed_files(cb)
 	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-		if vim.api.nvim_buf_get_option(buf, "modified") then
+		if vim.api.nvim_get_option_value("modified", { buf = buf }) then
 			vim.ui.select({ "Yes", "No" }, {
 				prompt = "You have unsaved changes. Do you want to proceed?",
 			}, function(choice)
